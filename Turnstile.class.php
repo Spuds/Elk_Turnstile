@@ -137,7 +137,7 @@ class Verification_Controls_Turnstile implements Verification_Controls
 	 */
 	public function doTest()
 	{
-		if (empty(trim($_POST['cf-turnstile-response'])))
+		if (!isset($_POST['cf-turnstile-response']) || empty(trim($_POST['cf-turnstile-response'])))
 		{
 			return 'wrong_captcha_verification';
 		}
