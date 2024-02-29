@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "https://www.elkarte.net/site/package-info">
+<package-info xmlns="https://www.elkarte.net/site/package-info" xmlns:elk="https://www.elkarte.net/">
+	<name>Turnstile</name>
+	<id>spuds:turnstile</id>
+	<type>addon</type>
+	<version>1.0.0</version>
+
+	<install for="1.1 - 1.1.99">
+		<readme type="file" parsebbc="true">readme.txt</readme>
+		<license type="inline">This Elkarte addon is released under a BSD-3-Clause license.</license>
+		<require-file name="Turnstile.class.php" destination="SUBSDIR" />
+		<require-file name="Turnstile.english.php" destination="LANGUAGEDIR/english" />
+		<require-file name="Turnstile.template.php" destination="THEMEDIR" />
+		<hook hook="integrate_control_verification" file="SUBSDIR/Turnstile.class.php" function="icv_turnstile" />
+		<redirect url="$scripturl?action=admin;area=securitysettings;sa=spam#recaptcha_verification" timeout="3000" />
+	</install>
+
+	<uninstall for="1.1 - 1.1.99">
+		<hook reverse="true" hook="integrate_control_verification" file="SUBSDIR/Turnstile.class.php" function="icv_turnstile" />
+		<remove-file name="SUBSDIR/Turnstile.class.php" />
+		<remove-file name="THEMEDIR/Turnstile.template.php" />
+		<remove-file name="LANGUAGEDIR/english/Turnstile.english.php" />
+	</uninstall>
+</package-info>
